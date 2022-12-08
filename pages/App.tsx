@@ -7,13 +7,12 @@ import RPC from "./ethersRPC";
 
 function App() {
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
-  const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(null);
-  const clientId = 'BOUw8Nm5-yTWjxUrAz2wgTL2n1W-6HKnv2eLK0VxldDgWJ3zc2s-r7n5eq2XxyPv6Lj1hIg8vvquPWhC39UcqCk'; // get from https://dashboard.web3auth.io
+  const [provider, setProvider] = useState<SafeEventEmitterProvider | null>(null);  
+  const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENTID ? process.env.NEXT_PUBLIC_WEB3AUTH_CLIENTID : ''; // get from https://dashboard.web3auth.io
 
   useEffect(() => {
     const init = async () => {
       try {
-        debugger
         const web3authConfig: Web3AuthOptions = {
           web3AuthNetwork: 'testnet',
           enableLogging: true,
@@ -32,7 +31,6 @@ function App() {
         setProvider(web3auth.provider);
           
       } catch (error) {
-        debugger
         console.error(error);
       }
     };
